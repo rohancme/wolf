@@ -1,2 +1,5 @@
 pytest
 javalang
+requests[security]
+gitpython
+shutil
