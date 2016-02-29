@@ -25,10 +25,11 @@ class Parser(object):
             if type(child) is javalang.tree.ClassDeclaration:
                 class_name = child.name
                 break
-
-        java_descriptor = JavaClassDesc(name=class_name, package=package_name)
-
-        self.class_list += [java_descriptor]
+        if class_name is not None:
+            java_descriptor = JavaClassDesc(name=class_name, package=package_name)
+            self.class_list += [java_descriptor]
+        else:
+            print "No class found for:" + str(file_name)
 
     def get_class_descs(self):
         return self.class_list

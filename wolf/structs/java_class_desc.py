@@ -8,7 +8,7 @@ class JavaClassDesc(object):
 
     def __str__(self):
         string = "<Java Class Descriptor Object>"
-        string += "\nName: " + self.name
-        string += "\nPackage: " + self.package
+        string += "\nName: " + str(self.name)
+        string += "\nPackage: " + str(self.package)
         string += "\n\t-------------------------"
         return string
