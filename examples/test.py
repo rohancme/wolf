@@ -18,11 +18,11 @@ for arg in cmd_args:
         else:
             print 'path does not exist'
 
-# rh = RepoHandler("https://github.com/rometools/rome.git")
-# print "Cloning repo..."
-# rh.clone_repo()
-# print "Done."
-rh = RepoHandler(temp_dir_path='/home/rohan/courses/wolf/rome')
+rh = RepoHandler(repo_url='https://github.com/rometools/rome.git')
+print "Cloning repo..."
+rh.clone_repo()
+print "Done."
+# rh = RepoHandler(temp_dir_path='/home/rohan/courses/wolf/rome')
 print "Repo cloned in folder:" + rh.get_path()
 
 print "Retrieving the list of modified files.."

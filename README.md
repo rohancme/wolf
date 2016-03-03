@@ -28,3 +28,9 @@ pip install -r requirements.txt
 ```
 py.test tests
 ```
+
+#### Example
+
+```
+There will be multiple examples in the examples folder in the future for various possible workflows. At the moment I'm keeping `test.py` updated to run through all the implemented functionality.
+```
