@@ -34,7 +34,7 @@ py.test tests
 ```
 python wolf/test.py
 ```
-
+*Either --repoPath or --url should be specified*
 ##### Arguments
 ```
   -h, --help            show this help message and exit
@@ -42,7 +42,7 @@ python wolf/test.py
   --repoPath FOLDER     Local Path to existing maven java project
   --skipClassList FILE  Specify a file with classes that should be ignored
   --testListFile FILE   Specify output file with list of tests generated
-  --numCommits INTEGER  Numbers of commits to check for modified files
+  --numCommits INTEGER  Number of commits to check for modified files
   --subfolder FOLDER    Specify a specific subfolder for which wolf should be
                         run. NOTE: The subfolder must contain pom.xml
   --randoopPath JAR     Path to the randoop jar wolf should use
