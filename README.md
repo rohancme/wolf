@@ -36,7 +36,7 @@ python wolf/test.py
 ```
 
 ##### Arguments
-
+```
   -h, --help            show this help message and exit
   --url URL             The Github URL for the repo
   --repoPath FOLDER     Local Path to existing maven java project
@@ -49,4 +49,4 @@ python wolf/test.py
   --randoopTimeout SECONDS
                         Max time randoop should spend on generating tests
   --reduce              Attempt to reduce the number of test cases
-
+```
