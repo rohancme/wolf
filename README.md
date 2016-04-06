@@ -29,8 +29,24 @@ pip install -r requirements.txt
 py.test tests
 ```
 
-#### Example
+#### Run the tool
 
 ```
-There will be multiple examples in the examples folder in the future for various possible workflows. At the moment I'm keeping `test.py` updated to run through all the implemented functionality.
+python wolf/test.py
 ```
+
+##### Arguments
+
+  -h, --help            show this help message and exit
+  --url URL             The Github URL for the repo
+  --repoPath FOLDER     Local Path to existing maven java project
+  --skipClassList FILE  Specify a file with classes that should be ignored
+  --testListFile FILE   Specify output file with list of tests generated
+  --numCommits INTEGER  Numbers of commits to check for modified files
+  --subfolder FOLDER    Specify a specific subfolder for which wolf should be
+                        run. NOTE: The subfolder must contain pom.xml
+  --randoopPath JAR     Path to the randoop jar wolf should use
+  --randoopTimeout SECONDS
+                        Max time randoop should spend on generating tests
+  --reduce              Attempt to reduce the number of test cases
+
