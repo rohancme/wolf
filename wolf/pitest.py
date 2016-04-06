@@ -20,7 +20,7 @@ class PITest(object):
             xml_data = pom_file.read()
 
         root = ET.XML(xml_data)
-        print root.attrib
+        # print root.attrib
         plugins_element = None
 
         # There needs to be a check here to see if pitest is already included
@@ -40,12 +40,21 @@ class PITest(object):
             version_elem.text = '1.1.2'
             configuration = ET.SubElement(plugin_element, 'configuration')
 
+            threads_elem = ET.SubElement(configuration, 'threads')
+            threads_elem.text = '4'
             target_classes = ET.SubElement(configuration, 'targetClasses')
             class_param_elem = ET.SubElement(target_classes, 'param')
             class_param_elem.text = test_package
             target_tests = ET.SubElement(configuration, 'targetTests')
             test_param_elem = ET.SubElement(target_tests, 'param')
             test_param_elem.text = test_package
+            reports_dir_elem = ET.SubElement(configuration, 'reportsDirectory')
+            reports_dir_elem.text = 'wolf_reports'
+            ts_report_elem = ET.SubElement(configuration, 'timestampedReports')
+            ts_report_elem.text = 'false'
+
+            export_line_coverage_elem = ET.SubElement(configuration, 'exportLineCoverage')
+            export_line_coverage_elem.text = 'true'
 
         new_data = ET.tostring(root)
         new_data = new_data.replace('ns0:', '')

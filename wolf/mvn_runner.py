@@ -2,7 +2,7 @@
 
 import os
 import fnmatch
-from subprocess import call
+from subprocess import check_output
 
 
 def check_set_cwd(func):
@@ -54,8 +54,8 @@ class MvnRunner(object):
         if self.quiet_mode:
             cmd_list += ['-q']
 
-        ret_val = call(cmd_list)
-        return ret_val
+        proc_output = check_output(cmd_list)
+        return proc_output
 
     @check_set_cwd
     def test(self):
@@ -63,8 +63,8 @@ class MvnRunner(object):
         cmd_list = ["mvn", "test"]
         if self.quiet_mode:
             cmd_list += ['-q']
-        ret_val = call(cmd_list)
-        return ret_val
+        proc_output = check_output(cmd_list)
+        return proc_output
 
     @check_set_cwd
     def install(self):
@@ -72,18 +72,21 @@ class MvnRunner(object):
         cmd_list = ["mvn", "install"]
         if self.quiet_mode:
             cmd_list += ['-q']
-        ret_val = call(cmd_list)
-        return ret_val
+        proc_output = check_output(cmd_list)
+        return proc_output
 
     @check_set_cwd
     def assemble_with_deps(self):
         """Assemble a jar with dependencies."""
+        self.install()
         command_list = ["mvn", "assembly:assembly",
                         "-DdescriptorId=jar-with-dependencies"]
         if self.quiet_mode:
             command_list += ['-q']
-        ret_val = call(command_list)
-        return ret_val
+        print "Running command:" + ' '.join(command_list)
+        proc_output = check_output(command_list)
+        print "Done."
+        return proc_output
 
     @check_set_cwd
     def get_jar_with_deps(self):
@@ -106,5 +109,5 @@ class MvnRunner(object):
         command_list = ["mvn"] + custom_command.split(' ')
         if self.quiet_mode:
             command_list += ['-q']
-        ret_val = call(command_list)
-        return ret_val
+        proc_output = check_output(command_list)
+        return proc_output

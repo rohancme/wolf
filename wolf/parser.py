@@ -13,9 +13,11 @@ class Parser(object):
 
     def parse(self, file_name):
 
-        with open(file_name, "r") as file:
-            contents = file.read()
-
+        try:
+            with open(file_name, "r") as file:
+                contents = file.read()
+        except IOError:
+            return None
         tree = javalang.parse.parse(contents)
 
         package_name = tree.package.name
@@ -28,8 +30,8 @@ class Parser(object):
         if class_name is not None:
             java_descriptor = JavaClassDesc(name=class_name, package=package_name)
             self.class_list += [java_descriptor]
-        else:
-            print "No class found for:" + str(file_name)
+        # else:
+        #     print "No class found for:" + str(file_name)
 
     def get_class_descs(self):
         return self.class_list

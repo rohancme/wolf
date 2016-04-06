@@ -7,14 +7,16 @@ import fnmatch
 
 class RandoopRunner(object):
 
-    def __init__(self, randoop_jar, project_jar, quiet_mode=False):
+    def __init__(self, randoop_jar, project_jar, timeout, quiet_mode=False):
         """Initialize randoop and project jar paths."""
         self.randoop_jar = randoop_jar
         self.project_jar = project_jar
         self.quiet_mode = quiet_mode
+        self.timeout = timeout
 
     def generate_tests(self, file_desc, class_desc):
         """Generate tests and move them to correct directory."""
+        list_of_tests = []
         path = file_desc.path
         class_name = class_desc.name
         package_name = class_desc.package
@@ -77,6 +79,7 @@ class RandoopRunner(object):
         if not os.path.exists(test_path):
             os.makedirs(test_path)
         shutil.move('RegressionTest.java', test_file_path)
+        list_of_tests += [test_file_path]
 
         # Now add package name and move all the other RegressionTest files
 
@@ -95,21 +98,24 @@ class RandoopRunner(object):
                 new_file_name = class_name + fileName
                 test_file_path = '/'.join([test_path, new_file_name])
                 shutil.move(fileName, test_file_path)
+                list_of_tests += [test_file_path]
+
+        return list_of_tests
 
     def run(self, package_name, class_name):
         """Run randoop to generate tests."""
-        print self.randoop_jar
-        print self.project_jar
+        # print self.randoop_jar
+        # print self.project_jar
         classpath = ':'.join([self.randoop_jar, self.project_jar])
         randoop_class = 'randoop.main.Main'
         method = 'gentests'
         full_class_name = '.'.join([package_name, class_name])
         cmd_list = ['java', '-classpath', classpath, randoop_class, method,
                     '--testclass=' + full_class_name,
-                    '--timelimit=30']
+                    '--timelimit=' + str(self.timeout)]
         if self.quiet_mode:
             cmd_list += ['--noprogressdisplay=true']
-        print "Executing the following command:"
-        print ' '.join(cmd_list)
+        # print "Executing the following command:"
+        # print ' '.join(cmd_list)
 
         return call(cmd_list)
