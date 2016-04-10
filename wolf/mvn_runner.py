@@ -3,6 +3,7 @@
 import os
 import fnmatch
 from subprocess import check_output
+from subprocess import CalledProcessError
 
 
 def check_set_cwd(func):
@@ -31,12 +32,19 @@ def set_cwd(path):
 class MvnRunner(object):
     """Defines functions to run various maven phases."""
 
-    def __init__(self, project_path, quiet_mode=False):
+    def __init__(self, project_path, subfolder=None, quiet_mode=False):
         """Initialize the object with the path to the mvn project."""
         if (os.path.isabs(project_path)):
-            self.dir = project_path
+            self.dir = project_path + "/" + subfolder
+            if subfolder is not None:
+                self.parent_dir = project_path
         else:
-            self.dir = '/'.join([os.getcwd(), project_path])
+            self.dir = '/'.join([os.getcwd(), project_path, subfolder])
+            if subfolder is not None:
+                self.parent_dir = '/'.join([os.getcwd(), project_path])
+
+        if not subfolder:
+            self.parent_dir = None
 
         self.quiet_mode = quiet_mode
 
@@ -72,6 +80,15 @@ class MvnRunner(object):
         cmd_list = ["mvn", "install"]
         if self.quiet_mode:
             cmd_list += ['-q']
+
+        if self.parent_dir is not None:
+            os.chdir(self.parent_dir)
+            try:
+                proc_output = check_output(cmd_list)
+            except CalledProcessError as e:
+                print e.output
+                print "Failed to mvn install parent dir. Continuing..."
+
         proc_output = check_output(cmd_list)
         return proc_output
 

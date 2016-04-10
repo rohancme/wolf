@@ -10,10 +10,9 @@ import argparse
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--url',
-                    default='https://github.com/rometools/rome.git',
+                    metavar='URL',
                     help='The Github URL for the repo')
 parser.add_argument('--repoPath',
-                    default='/home/rohan/courses/wolf/rome',
                     metavar='FOLDER',
                     help='Local Path to existing maven java project')
 parser.add_argument('--skipClassList',
@@ -141,7 +140,8 @@ if not args.noPrompts:
 
 print "***********************************************"
 print "\033[92mAssembling the jar with dependencies..\033[37m"
-mvn_runner = MvnRunner(repo_path, True)
+mvn_runner = MvnRunner(project_path=args.repoPath, subfolder=args.subfolder,
+                       quiet_mode=True)
 # assemble the jar with dependencies
 jar_path = mvn_runner.get_jar_with_deps()
 if jar_path is None:
