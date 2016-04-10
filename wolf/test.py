@@ -51,6 +51,10 @@ parser.add_argument('--randoopTimeout',
 parser.add_argument('--reduce',
                     action='store_true',
                     help='Attempt to reduce the number of test cases')
+parser.add_argument('--noPrompts',
+                    action='store_true',
+                    help='No prompts after each step. Wolf runs with all ' +
+                    'options specified without waiting for additional inputs.')
 args = parser.parse_args()
 
 skip_class_list = []
@@ -80,7 +84,8 @@ elif args.url:
     print "Repo cloned in folder:" + rh.get_path()
     print "***********************************************\n"
 
-raw_input()
+if not args.noPrompts:
+    raw_input()
 
 num_commits = args.numCommits
 
@@ -121,7 +126,8 @@ if package_name.endswith('.'):
 print "Package Name:" + package_name
 print "\033[92mDone.\033[37m"
 print "***********************************************\n"
-raw_input()
+if not args.noPrompts:
+    raw_input()
 
 
 print "***********************************************"
@@ -130,7 +136,8 @@ pitest_runner = PITest('/'.join([repo_path, 'pom.xml']))
 pitest_runner.insert_into_pom(package_name)
 print "\033[92mDone.\033[37m"
 print "***********************************************\n"
-raw_input()
+if not args.noPrompts:
+    raw_input()
 
 print "***********************************************"
 print "\033[92mAssembling the jar with dependencies..\033[37m"
@@ -142,14 +149,16 @@ if jar_path is None:
     jar_path = mvn_runner.get_jar_with_deps()
 print "\033[92mDone.\033[37m"
 print "***********************************************\n"
-raw_input()
+if not args.noPrompts:
+    raw_input()
 
 print "***********************************************"
 print "\033[92mRunning PITest for initial analysis..\033[37m"
 mvn_runner.custom('org.pitest:pitest-maven:mutationCoverage')
 print "\033[92mDone.\033[37m"
 print "***********************************************\n"
-raw_input()
+if not args.noPrompts:
+    raw_input()
 
 print "***********************************************"
 print "\033[92mRunning Randoop...\033[37m"
@@ -174,7 +183,8 @@ with open(args.testListFile, 'w') as outFile:
 
 print "\033[92mDone.\033[37m"
 print "***********************************************\n"
-raw_input()
+if not args.noPrompts:
+    raw_input()
 
 mvn_runner = MvnRunner(repo_path, True)
 if args.reduce:
@@ -194,11 +204,13 @@ mvn_runner.clean()
 mvn_runner.install()
 print "\033[92mDone.\033[37m"
 print "***********************************************\n"
-raw_input()
+if not args.noPrompts:
+    raw_input()
 
 print "***********************************************"
 print "\033[92mRunning PITest for final analysis..\033[37m"
 mvn_runner.custom('org.pitest:pitest-maven:mutationCoverage')
 print "\033[92mDone.\033[37m"
 print "***********************************************\n"
-raw_input()
+if not args.noPrompts:
+    raw_input()
