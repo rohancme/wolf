@@ -186,7 +186,8 @@ print "***********************************************\n"
 if not args.noPrompts:
     raw_input()
 
-mvn_runner = MvnRunner(repo_path, True)
+mvn_runner = MvnRunner(project_path=args.repoPath, subfolder=args.subfolder,
+                       quiet_mode=True)
 if args.reduce:
     print "***********************************************"
     print "\033[92mReducing number of test cases...\033[37m"
