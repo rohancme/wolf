@@ -195,8 +195,3 @@ mvn_runner.custom('org.pitest:pitest-maven:mutationCoverage')
 print "\033[92mDone.\033[37m"
 print "***********************************************\n"
 raw_input()
-# for class_desc in parser.get_class_descs():
-#     print class_desc
-#     print ""
-
-# rh.delete_temp_dir()

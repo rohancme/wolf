@@ -2,4 +2,5 @@ pytest
 javalang
 requests[security]
 gitpython
-shutil
+lxml
+bs4

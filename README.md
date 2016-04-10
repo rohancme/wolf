@@ -17,7 +17,6 @@ Writing unit tests is quite possibly the least exciting part of a coding project
 #### Initialize environment
 
 ```
-
 virtualenv env
 source env/bin/activate
 pip install -r requirements.txt
@@ -36,6 +35,7 @@ python wolf/test.py
 ```
 *Either --repoPath or --url should be specified*
 ##### Arguments
+
 ```
   -h, --help            show this help message and exit
   --url URL             The Github URL for the repo
