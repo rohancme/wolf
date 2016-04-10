@@ -12,6 +12,20 @@ Writing unit tests is quite possibly the least exciting part of a coding project
 3. Now run PITest again. Keep the tests that improve PITest coverage. Submit a pull request with these new unit tests.
 
 
+### Requirements
+
+On *nix
+```
+# Install libxml2
+sudo apt-get install libxml2 -y;
+sudo apt-get install libxml2-dev -y;
+sudo apt-get install libxslt1-dev -y;
+sudo apt-get install zlib1g-dev -y;
+
+# Install python
+sudo apt-get install python;
+sudo apt-get install python-dev;
+
 ### Running the current state of the code
 
 #### Initialize environment

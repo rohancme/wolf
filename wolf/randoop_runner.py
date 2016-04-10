@@ -7,12 +7,14 @@ import fnmatch
 
 class RandoopRunner(object):
 
-    def __init__(self, randoop_jar, project_jar, timeout, quiet_mode=False):
+    def __init__(self, randoop_jar, project_jar, timeout,
+                 tests_per_file, quiet_mode=False):
         """Initialize randoop and project jar paths."""
         self.randoop_jar = randoop_jar
         self.project_jar = project_jar
         self.quiet_mode = quiet_mode
         self.timeout = timeout
+        self.tests_per_file = tests_per_file
 
     def generate_tests(self, file_desc, class_desc):
         """Generate tests and move them to correct directory."""
@@ -112,7 +114,8 @@ class RandoopRunner(object):
         full_class_name = '.'.join([package_name, class_name])
         cmd_list = ['java', '-classpath', classpath, randoop_class, method,
                     '--testclass=' + full_class_name,
-                    '--timelimit=' + str(self.timeout)]
+                    '--timelimit=' + str(self.timeout),
+                    '--testsperfile' + str(self.tests_per_file)]
         if self.quiet_mode:
             cmd_list += ['--noprogressdisplay=true']
         # print "Executing the following command:"

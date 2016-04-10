@@ -25,7 +25,8 @@ parser.add_argument('--testListFile',
                     metavar='FILE',
                     help='Specify output file with list of tests generated')
 parser.add_argument('--numCommits',
-                    help='Numbers of commits to check for modified files',
+                    help='Numbers of commits to check for modified files' +
+                    '(default 20)',
                     metavar='INTEGER',
                     type=int,
                     default=20)
@@ -37,6 +38,11 @@ parser.add_argument('--randoopPath',
                     metavar='JAR',
                     default='randoop-2.1.1.jar',
                     help='Path to the randoop jar wolf should use')
+parser.add_argument('--testsPerFile',
+                    help='Max number of tests per test file (default 500)',
+                    metavar='INTEGER',
+                    type=int,
+                    default=500)
 parser.add_argument('--randoopTimeout',
                     help='Max time randoop should spend on generating tests',
                     metavar='SECONDS',
@@ -150,7 +156,8 @@ print "\033[92mRunning Randoop...\033[37m"
 randoop_runner = RandoopRunner(randoop_jar=args.randoopPath,
                                project_jar=jar_path,
                                timeout=args.randoopTimeout,
-                               quiet_mode=True)
+                               quiet_mode=True,
+                               tests_per_file=args.testsPerFile)
 
 test_file_list = []
 
