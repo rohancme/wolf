@@ -35,15 +35,20 @@ class MvnRunner(object):
     def __init__(self, project_path, subfolder=None, quiet_mode=False):
         """Initialize the object with the path to the mvn project."""
         if (os.path.isabs(project_path)):
-            self.dir = project_path + "/" + subfolder
             if subfolder is not None:
+                self.dir = '/'.join([project_path, subfolder])
                 self.parent_dir = project_path
-        else:
-            self.dir = '/'.join([os.getcwd(), project_path, subfolder])
-            if subfolder is not None:
-                self.parent_dir = '/'.join([os.getcwd(), project_path])
+            else:
+                self.dir = project_path
 
-        if not subfolder:
+        else:
+            if subfolder is not None:
+                self.dir = '/'.join([os.getcwd(), project_path, subfolder])
+                self.parent_dir = '/'.join([os.getcwd(), project_path])
+            else:
+                self.dir = '/'.join([os.getcwd(), project_path])
+
+        if subfolder is None:
             self.parent_dir = None
 
         self.quiet_mode = quiet_mode

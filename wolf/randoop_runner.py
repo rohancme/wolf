@@ -115,7 +115,7 @@ class RandoopRunner(object):
         cmd_list = ['java', '-classpath', classpath, randoop_class, method,
                     '--testclass=' + full_class_name,
                     '--timelimit=' + str(self.timeout),
-                    '--testsperfile' + str(self.tests_per_file)]
+                    '--testsperfile=' + str(self.tests_per_file)]
         if self.quiet_mode:
             cmd_list += ['--noprogressdisplay=true']
         # print "Executing the following command:"
