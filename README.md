@@ -35,6 +35,14 @@ sudo apt-get install libxslt1-dev -y;
 sudo apt-get install zlib1g-dev -y;
 ```
 
+On Mac
+```
+brew install libxml2
+brew install libxslt
+brew link libxml2 --force
+brew link libxslt --force
+```
+
 ### Running the current state of the code
 
 #### Initialize environment
