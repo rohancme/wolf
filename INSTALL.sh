@@ -13,8 +13,9 @@ sudo apt-get install oracle-java8-installer -y
 # Maven3
 sudo apt-get install maven -y
 
-# Install libxml2
+# Install other dependencies
 sudo apt-get install libxml2 -y
 sudo apt-get install libxml2-dev -y
 sudo apt-get install libxslt1-dev -y
 sudo apt-get install zlib1g-dev -y
+sudo apt-get install libffi-dev -y
