@@ -2,6 +2,9 @@
 sudo apt-get install python -y
 sudo apt-get install python-dev -y
 
+# Install virtualenv
+sudo apt-get install python-virtualenv -y
+
 # JAVA 8
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
