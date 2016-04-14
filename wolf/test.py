@@ -98,6 +98,8 @@ valid_file_desc = []
 if args.subfolder:
     repo_path = '/'.join([rh.get_path(), args.subfolder])
 
+if not repo_path:
+    repo_path = rh.get_path()
 # Get the list of all the recently modified java files which are not tests
 
 print "Generating test cases for:"
