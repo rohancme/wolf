@@ -140,7 +140,7 @@ if not args.noPrompts:
 
 print "***********************************************"
 print "\033[92mAssembling the jar with dependencies..\033[37m"
-mvn_runner = MvnRunner(project_path=args.repoPath, subfolder=args.subfolder,
+mvn_runner = MvnRunner(project_path=repo_path, subfolder=args.subfolder,
                        quiet_mode=True)
 # assemble the jar with dependencies
 jar_path = mvn_runner.get_jar_with_deps()
@@ -186,7 +186,7 @@ print "***********************************************\n"
 if not args.noPrompts:
     raw_input()
 
-mvn_runner = MvnRunner(project_path=args.repoPath, subfolder=args.subfolder,
+mvn_runner = MvnRunner(project_path=repo_path, subfolder=args.subfolder,
                        quiet_mode=True)
 if args.reduce:
     print "***********************************************"
