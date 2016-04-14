@@ -23,7 +23,15 @@ class RandoopRunner(object):
         class_name = class_desc.name
         package_name = class_desc.package
 
-        test_path = path.replace('/main/', '/test/', 1)
+        if '/main/' in path:
+            test_path = path.replace('/main/', '/test/', 1)
+
+        elif '/src/java/' in path:
+            test_path = path.replace('/src/java/', '/src/test/', 1)
+
+        else:
+            print "Unable to understand project structure"
+            print "Please configure this explicitly"
 
         # strip the name of the class under test
         test_path = test_path[0:test_path.rfind('/')]
