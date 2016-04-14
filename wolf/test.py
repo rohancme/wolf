@@ -95,9 +95,10 @@ print "Number of commits being analyzed:" + str(num_commits)
 file_name_list = []
 valid_file_desc = []
 
-# Get the list of all the recently modified java files which are not tests
 if args.subfolder:
     repo_path = '/'.join([rh.get_path(), args.subfolder])
+
+# Get the list of all the recently modified java files which are not tests
 
 print "Generating test cases for:"
 path_with_slash = repo_path + '/'
@@ -140,7 +141,7 @@ if not args.noPrompts:
 
 print "***********************************************"
 print "\033[92mAssembling the jar with dependencies..\033[37m"
-mvn_runner = MvnRunner(project_path=repo_path, subfolder=args.subfolder,
+mvn_runner = MvnRunner(project_path=rh.get_path(), subfolder=args.subfolder,
                        quiet_mode=True)
 # assemble the jar with dependencies
 jar_path = mvn_runner.get_jar_with_deps()
@@ -186,7 +187,7 @@ print "***********************************************\n"
 if not args.noPrompts:
     raw_input()
 
-mvn_runner = MvnRunner(project_path=repo_path, subfolder=args.subfolder,
+mvn_runner = MvnRunner(project_path=rh.get_path(), subfolder=args.subfolder,
                        quiet_mode=True)
 if args.reduce:
     print "***********************************************"
