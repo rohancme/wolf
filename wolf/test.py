@@ -9,6 +9,8 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
+repo_path = None
+
 parser.add_argument('--url',
                     metavar='URL',
                     help='The Github URL for the repo')
