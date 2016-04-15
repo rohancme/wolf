@@ -56,6 +56,13 @@ parser.add_argument('--noPrompts',
                     action='store_true',
                     help='No prompts after each step. Wolf runs with all ' +
                     'options specified without waiting for additional inputs.')
+parser.add_argument('--sendEmail',
+                    action='store_true',
+                    help='send an email on script complete.'+
+                    'Make sure to set senderId,pass and destID')
+parser.add_argument('--senderID')
+parser.add_argument('--senderPass')
+parser.add_argument('--destID')
 args = parser.parse_args()
 
 skip_class_list = []
@@ -220,3 +227,18 @@ print "\033[92mDone.\033[37m"
 print "***********************************************\n"
 if not args.noPrompts:
     raw_input()
+
+
+if args.sendEmail and args.senderID and args.senderPass and args.destID:
+    import smtplib
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(args.senderID, args.senderPass)
+
+    import socket
+    hostname = socket.gethostname()
+
+    msg = "Script Complete on:" + str(hostname)
+    server.sendmail(args.senderID, args.destID, msg)
+    server.quit()
