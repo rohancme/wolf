@@ -19,3 +19,6 @@ sudo apt-get install libxml2-dev -y
 sudo apt-get install libxslt1-dev -y
 sudo apt-get install zlib1g-dev -y
 sudo apt-get install libffi-dev -y
+sudo apt-get install build-essential -y
+sudo apt-get install libssl-dev -y
+
