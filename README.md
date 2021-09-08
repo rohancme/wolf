@@ -14,7 +14,7 @@ Writing unit tests is quite possibly the least exciting part of a coding project
 
 ### Requirements
 
-On *nix
+Linux
 ```
 # Install python
 sudo apt-get install python -y;
@@ -35,7 +35,7 @@ sudo apt-get install libxslt1-dev -y;
 sudo apt-get install zlib1g-dev -y;
 ```
 
-On Mac
+Mac
 ```
 brew install libxml2
 brew install libxslt
